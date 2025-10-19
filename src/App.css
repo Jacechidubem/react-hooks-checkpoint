@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+  background-color: #111;
+  color: white;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+h1 {
+  color: #e50914;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.movie-card {
+  background-color: #222;
+  border-radius: 10px;
+  width: 250px;
+  padding: 15px;
+  box-shadow: 0 0 10px #333;
+  transition: 0.3s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.filter,
+.add-movie {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+input,
+button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+button {
+  background-color: #e50914;
+  color: white;
+  cursor: pointer;
+}
