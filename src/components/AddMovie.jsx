@@ -1,54 +1,96 @@
 import { useState } from "react";
 
-const AddMovie = ({ addMovie }) => {
-  const [newMovie, setNewMovie] = useState({
-    title: "",
-    description: "",
-    posterURL: "",
-    rating: 0,
-  });
-
-  const handleChange = (e) => {
-    setNewMovie({ ...newMovie, [e.target.name]: e.target.value });
-  };
+function AddMovie({ onAdd }) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [posterURL, setPosterURL] = useState("");
+  const [rating, setRating] = useState("");
+  const [trailerLink, setTrailerLink] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!newMovie.title || !newMovie.posterURL) return;
-    addMovie(newMovie);
-    setNewMovie({ title: "", description: "", posterURL: "", rating: 0 });
+
+    if (!title || !posterURL) return alert("Please enter all fields!");
+
+    const newMovie = {
+      id: Date.now(), // ensures unique id
+      title,
+      description,
+      posterURL,
+      rating: parseFloat(rating),
+      trailerLink,
+    };
+
+    onAdd(newMovie);
+
+    // reset form
+    setTitle("");
+    setDescription("");
+    setPosterURL("");
+    setRating("");
+    setTrailerLink("");
   };
 
   return (
-    <form className="add-movie" onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+        maxWidth: "400px",
+        margin: "20px 0",
+      }}
+    >
+      <h3>Add a New Movie</h3>
+
       <input
+        id="title"
         name="title"
+        type="text"
         placeholder="Title"
-        value={newMovie.title}
-        onChange={handleChange}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
       />
-      <input
+
+      <textarea
+        id="description"
         name="description"
         placeholder="Description"
-        value={newMovie.description}
-        onChange={handleChange}
-      />
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      ></textarea>
+
       <input
+        id="posterURL"
         name="posterURL"
+        type="text"
         placeholder="Poster URL"
-        value={newMovie.posterURL}
-        onChange={handleChange}
+        value={posterURL}
+        onChange={(e) => setPosterURL(e.target.value)}
       />
+
       <input
+        id="rating"
         name="rating"
         type="number"
-        placeholder="Rating (1–5)"
-        value={newMovie.rating}
-        onChange={handleChange}
+        placeholder="Rating (1-5)"
+        value={rating}
+        onChange={(e) => setRating(e.target.value)}
       />
+
+      <input
+        id="trailerLink"
+        name="trailerLink"
+        type="text"
+        placeholder="Trailer Embed Link"
+        value={trailerLink}
+        onChange={(e) => setTrailerLink(e.target.value)}
+      />
+
       <button type="submit">Add Movie</button>
     </form>
   );
-};
+}
 
 export default AddMovie;

@@ -1,13 +1,17 @@
 import MovieCard from "./Moviecard";
 
-const MovieList = ({ movies }) => {
+function MovieList({ movies }) {
   return (
-    <div className="movie-list">
-      {movies.map((movie, index) => (
-        <MovieCard key={index} {...movie} />
-      ))}
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "15px" }}>
+      {movies && movies.length > 0 ? (
+        movies.map((movie) => (
+          <MovieCard key={movie.id || movie.title} movie={movie} />
+        ))
+      ) : (
+        <p>No movies found.</p>
+      )}
     </div>
   );
-};
+}
 
 export default MovieList;

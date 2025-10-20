@@ -1,20 +1,19 @@
-const Filter = ({ setTitleFilter, setRatingFilter }) => {
+function Filter({ onFilter }) {
   return (
-    <div className="filter">
+    <div style={{ marginBottom: "20px" }}>
       <input
         type="text"
         placeholder="Search by title..."
-        onChange={(e) => setTitleFilter(e.target.value)}
+        onChange={(e) => onFilter(e.target.value, null)}
       />
       <input
         type="number"
-        placeholder="Min rating (1–5)"
-        min="0"
-        max="5"
-        onChange={(e) => setRatingFilter(Number(e.target.value))}
+        placeholder="Min rating..."
+        onChange={(e) => onFilter(null, e.target.value)}
+        style={{ marginLeft: "10px" }}
       />
     </div>
   );
-};
+}
 
 export default Filter;
